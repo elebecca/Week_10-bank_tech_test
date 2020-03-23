@@ -9,6 +9,10 @@ class Account
         @balance += amount
     end
 
+    def withdraw(amount)
+        @balance -= amount
+    end
+
     def show_balance
         @balance
     end
