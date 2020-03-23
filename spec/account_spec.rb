@@ -9,10 +9,17 @@ describe Account do
 
 
   describe "#deposit" do
-    it "increases balance" do
-    subject.deposit(100)
-    expect(subject.show_balance).to equal(100)
+    it 'increases balance' do
+      subject.deposit(100)
+      expect(subject.show_balance).to equal(100)
     end
   end
-  
+
+  describe '#withdraw' do
+    it 'can remove money from the balance' do
+      subject.deposit(100)
+      subject.withdraw(50)
+      expect(subject.show_balance).to equal(50)
+    end
+  end
 end
