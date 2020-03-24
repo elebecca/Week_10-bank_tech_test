@@ -1,7 +1,12 @@
 class History 
-    attr_reader :transaction
+    attr_reader :transactions
 
     def initialize
-        @transaction = []
+        @transactions = []
     end
+
+    def add_transaction(transaction)
+        @transactions << transaction
+    end
+    
 end
