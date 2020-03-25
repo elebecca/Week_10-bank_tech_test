@@ -1,30 +1,22 @@
 class Account
-    attr_reader :balance
-
+    attr_reader :balance, :history
+  
     def initialize(amount, transaction, history)
-        @balance = amount
-        @transaction = transaction
-        @history = history
-
+      @balance = amount
+      @transaction = transaction
+      @history = history
     end
-
+  
     def deposit(amount)
-        @balance += amount
-        @history.add_transaction(@transaction.new('credit', amount, @balance))
-
-
+      @balance += amount
+      @history.add_transaction(@transaction.new('credit', amount, @balance))
+      @balance
     end
-
-    def withdraw(debit)
-        @balance -= debit
-        @history.add_transaction(@transaction.new('debit', amount, @balance))
-
-
+  
+    def withdraw(amount)
+      raise 'You do not have the funds' if @balance < amount
+      @balance -= amount
+      @history.add_transaction(@transaction.new('debit', amount, @balance))
+      @balance
     end
-
-    private
-
-    def add_transaction(transaction)
-        @history.transactions << transaction
-    end	  
-end
+  end
