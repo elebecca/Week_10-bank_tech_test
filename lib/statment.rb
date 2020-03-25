@@ -17,5 +17,3 @@ class Statement
         puts statement
       end
     end
-    
-end 
