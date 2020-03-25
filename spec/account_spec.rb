@@ -1,32 +1,46 @@
 require 'account'
 
 describe Account do
-  subject(:account) { described_class.new }
+  balance = 1000
+  amount = 500
+
+  let(:transaction) { double :transaction, type: nil, balance: nil }
+  let(:account) { Account.new(balance, transaction) }
+
   
     it 'has an initial balance of 0' do
-      expect(account.balance).to equal(0)
+      expect(account.balance).to equal(1000)
+    end
+
+    before :each do
+      allow(transaction).to receive(:new)
     end
 
 
-  describe "#deposit" do
-    it 'can add money to the balance' do
-      subject.deposit(100)
-      expect(subject.show_balance).to equal(100)
-    end
-  end
+    describe '#deposit' do
+      it 'credits a deposited amount to the balance' do
+        expect { account.deposit(amount) }.to change {
+          account.balance
+        }.by 500
+      end
 
-  describe '#withdraw' do
-    it 'can remove money from the balance' do
-      subject.deposit(100)
-      subject.withdraw(50)
-      expect(subject.show_balance).to equal(50)
+      it 'creates a new transaction' do
+        expect(transaction).to receive(:new)
+        account.deposit(amount)
+
+      end
     end
 
-    # it 'raise an error when the balance is smaller then the withdraw' do
-    #   subject.deposit(100)
-    #   subject.withdraw(150)
-    #   expect(subject.withdraw).to raise_error('You do not have the funds')
-    # end	   
-    
+    describe '#withdraw' do
+      it 'debits a withdrawn amount from the balance' do
+        expect { account.withdraw(amount) }.to change {
+          account.balance
+          }.by(- 500)
+      end	    
+
+      it 'creates a new transaction' do
+        expect(transaction).to receive(:new)
+        account.deposit(amount)
+    end
   end
 end
