@@ -26,9 +26,34 @@ date       || credit  || debit  || balance
 ```
 | Classes:         | Instance:                                          | Methods:
 | ---------------- | -------------------------------------------------- |------------------------------------------  
-| **Acount:**      | @balance, @transaction,@history                    | deposit, withdraw                                       
-| **Transaction:** | @date, @type, @balance, @amout                     |
-| **History:**     | @transaction                                       | add_transaction
-| **Statment:**    | @history                                           | print_statement(header, credit, debit)
-| **ATM:**         | @accont, @statment                                 | show_statment(deposit, withdraw)
+| Acount:          | @balance, @transaction,@history                    | deposit, withdraw                                       
+| Transaction:     | @date, @type, @balance, @amout                     |
+| History:         | @transaction                                       | add_transaction
+| Statment:        | @history                                           | print_statement(header, credit, debit)
+| ATM:             | @accont, @statment                                 | show_statment(deposit, withdraw)
+```
+
+**Functionality**
+
+```
+:001 >require './lib/account.rb'
+=> true
+:002 > require './lib/atm.rb'
+=> true
+:003 >require './lib/transaction.rb'
+=> true
+:004 >require './lib/statement.rb'
+=> true
+:005 > require './lib/history.rb'
+=> true
+:006 > atm = ATM.new(Account.new(0, Transaction, History.new), Statement)
+=> ##<ATM:0x00007fe65309b2a8 @account=#<Account:0x00007fe65309b2d0 @balance=0, @transaction=Transaction, @history=#<History:0x00007fe65309b320 @transactions=[]>>, @statement=Statement> 
+:007 > atm.deposit(1000)
+=> 1000
+:008 > atm.withdraw(500)
+=> 500
+:009 > atm.show_statement
+date || credit || debit || balance
+26/03/2020 || || 1000.00 || 1000.00
+26/03/2020 || 500.00 || || 500.00
 ```

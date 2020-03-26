@@ -3,8 +3,8 @@ require 'date'
 describe Statement do
 
   let(:transaction) {double :transaction, 
-                            date: Date.parse('2020-03-25'), 
-                            type: 'debit', 
+                            date: Date.parse('25/03/2020'), 
+                            type: 'credit', 
                             amount: 500, 
                             balance: 1500
                     }
@@ -18,7 +18,7 @@ describe Statement do
   describe '#print_statement' do
     it 'prints the account information for the user to see' do
         expect { statement.print_statement }.to output(
-        "date || credit || debit || balance\n2020-03-25 || || 500 || 1500\n"
+        "date || credit || debit || balance\n25/03/2020 || || 500.00 || 1500.00\n"
         ).to_stdout
         end
     end

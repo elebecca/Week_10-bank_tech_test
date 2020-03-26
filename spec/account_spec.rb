@@ -9,7 +9,7 @@ describe Account do
   let(:account) { Account.new(balance, transaction, history) }
 
   
-    it 'has an initial balance of 0' do
+    it 'has an initial balance of 1000' do
       expect(account.balance).to equal(1000)
     end
 
